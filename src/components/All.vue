@@ -12,27 +12,27 @@
 <script>
 export default {
   name: 'All',
-  data(){
+  data () {
     return {
       rowsValue: []
     }
   },
   mounted () {
-    this.rowsValue = this.$store.state.rowData;
-    this.$parent.getcompleted_count();
+    this.rowsValue = this.$store.state.rowData
+    this.$parent.getcompleted_count()
   },
-  methods : {
-    s_editContent:function(that) {
+  methods: {
+    s_editContent: function (that) {
       this.$parent.editContent(that)
     },
-    s_edit_f:function (that,index,state) {
-      this.$parent.edit_f(that,index,state)
+    s_edit_f: function (that, index, state) {
+      this.$parent.edit_f(that, index, state)
     },
-    s_del_f:function (index) {
-      this.$parent.del_f(index);
+    s_del_f: function (index) {
+      this.$parent.del_f(index)
     },
-    s_getcompleted_count:function () {
-      this.$parent.getcompleted_count();
+    s_getcompleted_count: function () {
+      this.$parent.getcompleted_count()
     }
   }
 }

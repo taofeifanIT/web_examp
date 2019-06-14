@@ -10,33 +10,33 @@
 </template>
 
 <script>
-  export default {
-    name: 'Active',
-    data() {
-      return {
-        rowsValue: []
-      }
+export default {
+  name: 'Active',
+  data () {
+    return {
+      rowsValue: []
+    }
+  },
+  mounted () {
+    this.rowsValue = this.$store.state.rowData
+    console.log('Active')
+    console.log(this.rowsValue)
+  },
+  methods: {
+    s_editContent: function (that) {
+      this.$parent.editContent(that)
     },
-    mounted () {
-      this.rowsValue = this.$store.state.rowData;
-      console.log('Active');
-      console.log(this.rowsValue)
+    s_edit_f: function (that, index, state) {
+      this.$parent.edit_f(that, index, state)
     },
-    methods : {
-      s_editContent:function(that) {
-        this.$parent.editContent(that)
-      },
-      s_edit_f:function (that,index,state) {
-        this.$parent.edit_f(that,index,state)
-      },
-      s_del_f:function (index) {
-        this.$parent.del_f(index);
-      },
-      s_getcompleted_count:function () {
-        this.$parent.getcompleted_count();
-      }
+    s_del_f: function (index) {
+      this.$parent.del_f(index)
+    },
+    s_getcompleted_count: function () {
+      this.$parent.getcompleted_count()
     }
   }
+}
 </script>
 
 <style scoped>
