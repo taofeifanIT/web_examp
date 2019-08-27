@@ -14,10 +14,9 @@
             <li><router-link  to="/completed">completed</router-link></li>
         </ul>
         <span class="clear_task"  @click='delCompleted'>
-          <strong>Clear completed</strong>
+          <a-button>Clear complete</a-button>
         </span>
     </footer>
-
   </div>
 </template>
 
@@ -35,7 +34,7 @@ export default {
   // 更新数据
   mounted: function () {
     this.updateDate()
-    this.getcompleted_count()
+    this.getcompletedCount()
   },
   created () {
     this.$watch('rowsValue', function (newValue, oldValue) {
@@ -45,16 +44,14 @@ export default {
   methods: {
     // 显示导航栏
     showNav: function () {
-      if (this.rowsValue.length > 0) { this.footerStatu = true } else { this.footerStatu = false }
+      this.footerStatu = this.rowsValue.length > 0
     },
     nextTask: function () {
-      var that = this
-      console.log(that.firstrow)
-      if (that.firstrow) {
-        that.$store.commit('SET_ROWDATA', {content: that.firstrow, state: false})
-        that.firstrow = ''
-        that.updateDate()// 刷新
-        that.getcompleted_count()
+      if (this.firstrow) {
+        this.$store.commit('SET_ROWDATA', {content: this.firstrow, state: false})
+        this.firstrow = ''
+        this.updateDate()// 刷新
+        this.getcompletedCount()
       }
     },
     updateDate: function () {
@@ -71,7 +68,7 @@ export default {
 
       console.log('获取焦点' + nextnode)
     },
-    edit_f: function (that, index, state) {
+    editItem: function (that, index, state) {
       // eslint-disable-next-line camelcase
       let curr_node = that.currentTarget
       var prevnode = curr_node.previousElementSibling
@@ -80,7 +77,7 @@ export default {
       this.$store.commit('UPL_ROWDATA', {data: {content: curr_node.value, state: state}, index: index})
       this.updateDate()// 刷新
     },
-    del_f: function (index) {
+    delItem: function (index) {
       this.$store.commit('DEL_ROWDATA', {index: index})
       this.updateDate()// 刷新
     },
@@ -91,8 +88,8 @@ export default {
     delCompleted: function () {
       this.$store.commit('DELCOMPLETED_ROWDATA', {})
     },
-    getcompleted_count: function () {
-      this.$store.commit('COMPLETED_COUNT', {})
+    getcompletedCount: function () {
+      this.$store.commit('COMPLETED_COUNT')
       this.completed_count = this.$store.state.count
     }
   }
@@ -129,7 +126,7 @@ export default {
   .footer {
     color: #777;
     padding: 10px 15px;
-    height: 20px;
+    height: 51px;
     text-align: center;
     border-top: 1px solid #e6e6e6;
   }
@@ -184,7 +181,7 @@ export default {
     background-position: center left;
     text-align: left;
   }
-  .rowsbel {
+  .rowsBel {
     word-break: break-all;
     padding: 15px 15px 15px 60px;
     display: block;

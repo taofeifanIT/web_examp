@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="row" v-for="(item, index) in rowsValue"  v-show="item.state?false:true">
-      <input type="checkbox"  class="toggle"  v-bind:checked="item.state"   v-on:click="item.state=!item.state" @click="s_getcompleted_count">
-      <label  :class="item.state?'rowsbel completed':'rowsbel'"   @dblclick="s_editContent($event)">{{item.content}}</label>
-      <input type="text" class="edit" :value="item.content"  v-on:blur="s_edit_f($event,index,item.state)"  >
-      <button class="destroy" @click="s_del_f(index)" ></button>
+    <div class="row" v-for="(item, index) in rowsValue" v-bind:key="index"  v-show="item.state?false:true">
+      <input type="checkbox"  class="toggle"  v-bind:checked="item.state"   v-on:click="item.state=!item.state" @click="getCompletedCount">
+      <label  :class="item.state?'rowsBel completed':'rowsBel'"   @dblclick="editContent($event)">{{item.content}}</label>
+      <input type="text" class="edit" :value="item.content"  v-on:blur="editItem($event,index,item.state)"  >
+      <button class="destroy" @click="delItem(index)" ></button>
     </div>
   </div>
 </template>
@@ -14,26 +14,21 @@ export default {
   name: 'Active',
   data () {
     return {
-      rowsValue: []
+      rowsValue: this.$store.getters.rowData
     }
   },
-  mounted () {
-    this.rowsValue = this.$store.state.rowData
-    console.log('Active')
-    console.log(this.rowsValue)
-  },
   methods: {
-    s_editContent: function (that) {
+    editContent (that) {
       this.$parent.editContent(that)
     },
-    s_edit_f: function (that, index, state) {
-      this.$parent.edit_f(that, index, state)
+    editItem (that, index, state) {
+      this.$parent.editItem(that, index, state)
     },
-    s_del_f: function (index) {
-      this.$parent.del_f(index)
+    delItem (index) {
+      this.$parent.delItem(index)
     },
-    s_getcompleted_count: function () {
-      this.$parent.getcompleted_count()
+    getCompletedCount () {
+      this.$parent.getCompletedCount()
     }
   }
 }

@@ -5,10 +5,13 @@ import App from './App'
 import router from './router'
 import Vuex from 'vuex'
 import store from './store/index.js'
+import {Button} from 'ant-design-vue'
+import 'ant-design-vue/dist/antd.css'
+
 Vue.use(Vuex)
 Vue.config.productionTip = false
-
-
+// import AutoComplete from 'ant-design-vue/lib/AutoComplete'
+Vue.use(Button)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

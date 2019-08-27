@@ -1,6 +1,4 @@
-export
-const  count = state => state.rowData
-
-// const count = function count (state) {
-//    return state.count
-// }
+const getters = {
+  rowData: state => state.rowData
+}
+export default getters

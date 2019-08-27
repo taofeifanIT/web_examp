@@ -9,9 +9,9 @@ const mutations = {
     state.rowData.splice(val.index, 1)
   },
   ALLUPL_ROWDATA (state, val) {
-    for (var v in state.rowData) {
-      state.rowData[v].state = !state.rowData[v].state
-    }
+    state.rowData.forEach((item) => {
+      item.state = !item.state
+    })
   },
   DELCOMPLETED_ROWDATA (state, val) {
     for (var v = state.rowData.length - 1; v >= 0; v--) {
@@ -20,12 +20,7 @@ const mutations = {
     }
   },
   COMPLETED_COUNT (state, val) {
-    let count = 0
-    for (var v in state.rowData) {
-      if (state.rowData[v].state === false) { count += 1 }
-    }
-    console.log('count__' + count)
-    state.count = count
+    state.count = state.rowData.filter((item) => item.state === false).length
   }
 }
 export default mutations
